@@ -14,7 +14,7 @@ The rules below target both. The surface rules remove what readers notice. The r
 
 ## Workflow
 
-1. Before drafting, gather the specific material: names, numbers, dates, places, the author's own opinions and experiences. Ask the user for these if the piece depends on them. Specific detail does more than any other rule, and it can't be faked.
+1. Before drafting, gather the specific material: names, numbers, dates, places, the author's own opinions and experiences. Ask the user for these if the piece depends on them. Specific detail does more than any other rule, and it can't be faked. That cuts both ways. Never invent facts about the user's own work, life, or results to make the prose concrete. That includes how a piece looks or behaves, what happened at an event, how people reacted, and numbers. If the user isn't available to ask, write the sentence with a visible `[confirm: ...]` marker and list every marker in your reply. A vivid invented detail is worse than a plain true one, because the author may sign it without noticing.
 2. Draft with the rules below in mind.
 3. Save the draft to a file and run the checker:
    ```bash
@@ -34,7 +34,8 @@ These words appear at many times their human rates in post-2023 text. One of the
 
 ## 2. Sentence shapes
 
-- **Drop "not X, but Y" and its relatives** ("it's not just X, it's Y", "not only... but also", "no X, no Y, just Z"). This is the most-cited AI tell, at about 3× human rates. State the claim directly.
+- **Drop "not X, but Y" and its relatives**: "it's not just X, it's Y", "not only... but also", "no X, no Y, just Z", "no longer X; it is Y", "less about X than Y", and "X rather than Y" used as a reveal. This is the most-cited AI tell, at about 3× human rates. Models reach for these because they create a fake sense of insight by knocking down a position nobody held. State the claim directly.
+- **No epigram endings.** Don't close a paragraph or the piece with a short aphorism, such as "The text is never fixed. It exists only in relation to a body." or "Here the letter answers to the body that approaches it." This is the 2026 version of "delve": tidy, quotable, abstract, and present in almost every model's output. End a paragraph on a fact, an example, or the next step in the argument.
 - **Break the triad habit.** Models group things in threes at about 4× human rates. Use one, two, or four. Keep a genuine triad only if it's the only one in the piece.
 - **Use "is" and "has".** "Serves as", "stands as", "functions as", "represents", "boasts", "features", and "offers" replace plain copulas in AI prose. Humans write "is".
 - **Cut trailing significance clauses**, such as ", highlighting its importance", ", reflecting broader trends", or ", contributing to the growth of...". They add a shallow interpretation to the end of a fact. Delete them, or turn them into a sentence with real content.
@@ -82,9 +83,10 @@ The script catches patterns. This pass catches what it can't.
 
 1. **Opening:** Does the first sentence say something, or does it set the stage? Cut stage-setting.
 2. **Detail:** Find each abstract claim. Can a concrete detail replace it? Replace it.
-3. **Ending:** Does the last paragraph only restate the piece? Delete it.
-4. **Voice:** Could this paragraph appear in anyone's essay? If so, add the author's actual view, experience, or material.
-5. **Rhythm:** Read it aloud. A run of sentences with the same rhythm needs breaking.
+3. **Ending:** Does the last paragraph only restate the piece? Delete it. Does any paragraph end on a neat aphorism? Replace it with something concrete.
+4. **Invented facts:** Is every claim about the user's own work traceable to something they said? If not, add a `[confirm]` marker.
+5. **Voice:** Could this paragraph appear in anyone's essay? If so, add the author's actual view, experience, or material.
+6. **Rhythm:** Read it aloud. A run of sentences with the same rhythm needs breaking.
 
 ## Honest limits
 

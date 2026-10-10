@@ -52,9 +52,13 @@ TRAILING_ING = re.compile(
 CONTRAST = re.compile(
     r"\bnot (just|only|merely|simply)\b[^.?!]{0,80}\b(but|it's|it is)\b"
     r"|\bit'?s not\b[^.?!]{0,60}[,;]\s*it'?s\b"
-    r"|\bisn't (just|only|merely)\b",
+    r"|\bisn't (just|only|merely)\b"
+    r"|\bno longer\b[^.?!]{0,80}[;,]\s*(it|they|this|he|she|we|i)\b"
+    r"|\bless about\b[^.?!]{0,60}\bthan\b"
+    r"|\bnot (as |a |an |the |merely )?[^.?!,;]{1,50} but (?!(it|she|he|they|we|i|you|that|this|there)\b)",
     re.I,
 )
+SOFT_CONTRAST = re.compile(r"\brather than\b|\bstops? being\b[^.?!]{0,40}\bbecomes?\b|,\s+not\s+(a|an|the|just)?\s*\w+", re.I)
 TRIAD = re.compile(r"\b\w+(?: \w+)?, \w+(?: \w+)?,? and \w+", re.I)
 PLACEHOLDER = re.compile(r"\[(insert|describe|your|add)[^\]]*\]|\d{4}-XX-XX", re.I)
 DASHES = re.compile(r"[—–]| -- ")
@@ -94,6 +98,23 @@ def sentences(text):
     body = BULLET.sub("", body)
     parts = re.split(r"(?<=[.!?])\s+", body)
     return [p for p in (s.strip() for s in parts) if len(p.split()) >= 2]
+
+
+def epigram_endings(text):
+    """Short abstract sentences that close a paragraph."""
+    hits = []
+    pos = 0
+    for para in re.split(r"\n\s*\n", text):
+        start = text.find(para, pos)
+        pos = start + len(para)
+        stripped = para.strip()
+        if not stripped.endswith(".") or stripped.startswith(("#", "-", "*")):
+            continue
+        last = re.split(r"(?<=[.!?])\s+", stripped)[-1]
+        words = last.split()
+        if 3 <= len(words) <= 12 and not re.search(r"\d", last):
+            hits.append((line_of(text, start + para.rfind(last)), last))
+    return hits
 
 
 def rhythm_report(text):
@@ -150,6 +171,8 @@ def main():
     soft = {
         "Watch-list words": find_terms(text, WATCH),
         "Possible triads": find_regex(text, TRIAD),
+        "Soft contrasts (rather than / X, not Y)": find_regex(text, SOFT_CONTRAST),
+        "Short paragraph-closing lines (check for epigrams)": epigram_endings(text),
         "Bold in text": find_regex(text, BOLD),
         "Bullet/numbered lines": find_regex(text, BULLET),
         "Curly quotes": find_regex(text, CURLY),
