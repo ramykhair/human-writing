@@ -204,8 +204,8 @@ def main():
         print("  Too few sentences to measure.")
     else:
         print("  " + ", ".join(f"{k} {v}" for k, v in stats.items()))
-        if stats["cv"] < 0.4:
-            print("  Sentence lengths are too uniform (cv < 0.4). Mix very short and very long sentences.")
+        if stats["cv"] < 0.5:
+            print("  Sentence lengths are too uniform (cv < 0.5). Mix very short and very long sentences.")
         if stats["short (<=6)"] == 0 or stats["long (>=30)"] == 0:
             print("  Missing extremes: include at least one sentence of 6 words or fewer and one of 30 or more.")
         if flat:
